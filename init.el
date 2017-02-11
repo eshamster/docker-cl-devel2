@@ -33,6 +33,7 @@
         ("C-_"  . undo)
         ("C-\\" . undo)
         ("C-o"  . nil)
+        ("M-*"  . pop-tag-mark)
         ("C-x ;" . comment-region)
         ("C-x :" . uncomment-region)
         ("C-x C-i"   . indent-region)))
