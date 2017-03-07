@@ -76,7 +76,7 @@
   (if (eq major-mode 'dired-mode)
       (kill-buffer my-dired-before-buffer)))
 
-(setq dired-listing-switches "-l --group-directories-first")
+(setq dired-listing-switches "-lXa")
 
 ;; ----- Other libraries ----- ;;
 
