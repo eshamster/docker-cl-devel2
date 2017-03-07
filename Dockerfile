@@ -4,7 +4,7 @@ RUN apk add --no-cache emacs git w3m
 
 # --- install wget with certificate --- #
 
-RUN apk add --no-cache ca-certificates wget && \
+RUN apk add --no-cache ca-certificates wget openssh && \
     update-ca-certificates
 
 # --- make work directory --- #
