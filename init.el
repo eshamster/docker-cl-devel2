@@ -21,7 +21,8 @@
                     paredit
                     slime
                     ac-slime
-                    w3m))
+                    w3m
+                    smex))
 
 ;; ----- keybind ----- ;;
 
@@ -44,13 +45,16 @@
 (set-face-foreground 'font-lock-comment-face "#ee0909")
 (show-paren-mode t)
 
-;; -- icomplete-mode -- ;;
-(icomplete-mode 1)
-;; enable to toggle candidates by C-f or C-b 
-(add-hook 'icomplete-minibuffer-setup-hook
-          '(lambda ()
-             (local-set-key "\C-f" 'icomplete-forward-completions)
-             (local-set-key "\C-b" 'icomplete-backward-completions)))
+;; -- ido-mode -- ;;
+(require 'ido)
+(ido-mode t)
+(ido-everywhere t)
+(setq ido-enable-flex-matching t)
+
+;; smex
+(require 'smex)
+(global-set-key (kbd "M-x") 'smex)
+(global-set-key (kbd "M-X") 'smex-major-mode-commands)
 
 ;; -- -- ;;
 
@@ -122,6 +126,10 @@
   #'(define-key paredit-mode-map (kbd "C-c b") 'paredit-forward-barf-sexp))
 (eval-after-load "paredit"
   #'(define-key paredit-mode-map (kbd "C-h") 'paredit-backward-delete))
+(eval-after-load "paredit"
+  #'(define-key paredit-mode-map (kbd "M-p") 'paredit-backward))
+(eval-after-load "paredit"
+  #'(define-key paredit-mode-map (kbd "M-n") 'paredit-forward))
 (global-set-key (kbd "C-c m p") 'paredit-mode)
 
 (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)
@@ -132,3 +140,17 @@
 ;; --- auto settings --- ;;
 ;; --------------------- ;;
 
+(put 'dired-find-alternate-file 'disabled nil)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(magit-merge-arguments (quote ("--no-ff")))
+ '(package-selected-packages (quote (smex w3m paredit markdown-mode magit ac-slime))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
