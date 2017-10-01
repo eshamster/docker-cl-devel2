@@ -1,3 +1,4 @@
+
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/site-lisp"))
 
 ;; ----- Install packages ----- ;;
@@ -127,14 +128,20 @@
 (eval-after-load "paredit"
   #'(define-key paredit-mode-map (kbd "C-h") 'paredit-backward-delete))
 (eval-after-load "paredit"
-  #'(define-key paredit-mode-map (kbd "M-p") 'paredit-backward))
+  #'(define-key paredit-mode-map (kbd "C-c p") 'paredit-backward))
 (eval-after-load "paredit"
-  #'(define-key paredit-mode-map (kbd "M-n") 'paredit-forward))
+  #'(define-key paredit-mode-map (kbd "C-c n") 'paredit-forward))
 (global-set-key (kbd "C-c m p") 'paredit-mode)
 
 (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)
 (add-hook 'slime-mode-hook 'enable-paredit-mode)
 (add-hook 'slime-repl-mode-hook 'enable-paredit-mode)
+
+;; warning for long line
+(add-hook 'slime-mode-hook
+          (lambda ()
+            (font-lock-add-keywords
+             nil '(("^[^\n]\\{100\\}\\(.*\\)$" 1 font-lock-warning-face t)))))
 
 ;; --------------------- ;;
 ;; --- auto settings --- ;;
@@ -147,7 +154,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(magit-merge-arguments (quote ("--no-ff")))
- '(package-selected-packages (quote (smex w3m paredit markdown-mode magit ac-slime))))
+ '(package-selected-packages
+   (quote
+    (wgrep smex w3m paredit markdown-mode magit ac-slime))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
