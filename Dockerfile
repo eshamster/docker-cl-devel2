@@ -47,3 +47,10 @@ RUN emacs --batch --load ${emacs_home}/init.el
 
 # --- miscs --- #
 WORKDIR /root
+
+# --- others --- #
+# Avoid the following error when slime-restart-inferior-lisp using ccl-bin.
+# (("Error in timer" slime-attempt-connection (#<process inferior-lisp> nil 10) (file-error "Failed connect" "Connection refused")))
+# This refers https://stackoverflow.com/questions/9161871/slime-doesnt-work-in-emacs24
+RUN find . -name "slime.el" | xargs sed -ie "s/\(lexical-binding:\)t/\1nil/" && \
+    find . -name "slime.elc" | xargs rm
