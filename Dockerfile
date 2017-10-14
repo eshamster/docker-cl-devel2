@@ -1,5 +1,6 @@
-FROM eshamster/cl-base:2.2
+FROM eshamster/cl-base:2.3
 
+RUN apk update --no-cache
 RUN apk add --no-cache emacs git w3m
 
 # --- install wget with certificate --- #
