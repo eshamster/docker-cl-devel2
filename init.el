@@ -1,5 +1,7 @@
 
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/site-lisp"))
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/site-lisp/slime-2.19"))
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/site-lisp/ac-slime-0.8"))
 
 ;; ----- Install packages ----- ;;
 
@@ -20,8 +22,6 @@
                     magit
                     markdown-mode
                     paredit
-                    slime
-                    ac-slime
                     w3m
                     smex))
 
@@ -147,19 +147,17 @@
 ;; --- auto settings --- ;;
 ;; --------------------- ;;
 
-(put 'dired-find-alternate-file 'disabled nil)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(magit-merge-arguments (quote ("--no-ff")))
- '(package-selected-packages
-   (quote
-    (wgrep smex w3m paredit markdown-mode magit ac-slime))))
+ '(package-selected-packages (quote (wgrep smex w3m paredit markdown-mode magit))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+(put 'dired-find-alternate-file 'disabled nil)
