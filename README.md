@@ -8,10 +8,10 @@ This is successor of [cl-devel](https://github.com/eshamster/docker-cl-devel).
 
 ```bash
 $ docker pull eshamster/cl-devel2
-$ docker run -v <a host folder>:/home/dev/work/lisp -it eshamster/cl-devel2 /bin/bash
+$ docker run -v <a host folder>:/root/work -it eshamster/cl-devel2 /bin/sh
 ```
 
-Note: `/home/dev/work/lisp` is a sym-link to `/home/dev/.roswell/local-projects`
+Note: `/root/work` is a sym-link to `/root/.roswell/local-projects`
 
 ## Description
 
