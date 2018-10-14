@@ -1,4 +1,4 @@
-FROM eshamster/cl-base:2.3C
+FROM eshamster/cl-base:latest
 
 RUN apk update --no-cache
 RUN apk add --no-cache emacs git w3m
