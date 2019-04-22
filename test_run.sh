@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# set -eu
+set -eu
 
 name=cl-devel2
 

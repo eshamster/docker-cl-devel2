@@ -1,7 +1,5 @@
 
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/site-lisp"))
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/site-lisp/slime-2.19"))
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/site-lisp/ac-slime-0.8"))
 
 ;; ----- Install packages ----- ;;
 
@@ -23,7 +21,9 @@
                     markdown-mode
                     paredit
                     w3m
-                    smex))
+                    smex
+                    slime
+                    ac-slime))
 
 ;; ----- keybind ----- ;;
 
@@ -95,8 +95,6 @@
 ;; ----- Lisp ----- ;;
 
 ;; slime
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/slime"))
-
 (require 'slime)
 (setq inferior-lisp-program "ros run")
 (slime-setup '(slime-repl slime-fancy slime-banner))
