@@ -22,8 +22,8 @@ This mainly consists of ...
   - The following CL implementations are installed in default
     - sbcl
     - sbcl-bin
-    - ccl-bin/1.9
-- Emacs 25 with slime
+    - ccl-bin
+- Emacs 26 with slime
 
 ## Known issues
 
