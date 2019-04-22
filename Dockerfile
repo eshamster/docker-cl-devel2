@@ -42,13 +42,6 @@ RUN cd ${site_lisp} && \
 
 # --- run emacs for installing packages --- #
 
-# In slime 2.20, slime-restart-inferior-lisp fails when using ccl-bin.
-# If changing lexical-binding in slime.el to nil, it could be solved.
-# But in the settings, it fails when using sbcl-bin...
-# So I decided to downgrade slime to 2.19
-RUN cd ${emacs_home}/site-lisp && \
-    wget -O - https://github.com/slime/slime/archive/v2.19.tar.gz | tar zxf - && \
-    wget -O - https://github.com/purcell/ac-slime/archive/0.8.tar.gz | tar zxf -
 COPY init.el ${emacs_home}
 
 RUN emacs --batch --load ${emacs_home}/init.el
