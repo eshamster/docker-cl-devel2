@@ -83,6 +83,16 @@
 
 (setq dired-listing-switches "-lXa")
 
+(advice-add 'find-name-dired :around
+            (lambda (orig-func &rest rest)
+              (let ((orig-option find-ls-option))
+                (unwind-protect
+                    (progn
+                      (setq find-ls-option
+                            '("-exec ls --color=never -ld {} \\;" . "-ld"))
+                      (apply orig-func rest))
+                  (setq find-ls-option orig-option)))))
+
 ;; ----- Other libraries ----- ;;
 
 ;; display the directory name of the file when files that have a same name are opened
