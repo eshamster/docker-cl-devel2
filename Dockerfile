@@ -1,7 +1,7 @@
 FROM eshamster/cl-base:latest
 
 RUN apk update --no-cache
-RUN apk add --no-cache emacs git w3m
+RUN apk add --no-cache emacs git
 
 # --- install wget with certificate --- #
 

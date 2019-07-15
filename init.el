@@ -20,7 +20,6 @@
                     magit
                     markdown-mode
                     paredit
-                    w3m
                     smex
                     slime
                     ac-slime))
@@ -120,12 +119,9 @@
 (add-hook 'slime-mode-hook 'set-up-slime-ac)
 (add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
 
-;; HyperSpec on w3
-(require 'hyperspec)
-(setq common-lisp-hyperspec-root (concat "file://" (expand-file-name "~/.emacs.d/docs/HyperSpec/")))
-(require 'w3m)
-(setq browse-url-browser-function 'w3m-browse-url)
-(global-set-key (kbd "C-c h") 'hyperspec-lookup)
+;; hyperspec
+(setq browse-url-browser-function 'eww-browse-url)
+(global-set-key (kbd "C-c h") 'slime-hyperspec-lookup)
 
 ;; paredit
 (require 'paredit)
@@ -167,5 +163,5 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(italic ((t (:background "black" :foreground "#ffffff" :slant italic)))))
 (put 'dired-find-alternate-file 'disabled nil)
