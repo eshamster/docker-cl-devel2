@@ -13,6 +13,8 @@ $ docker run -v <a host folder>:/root/work -it eshamster/cl-devel2 /bin/sh
 
 Note: `/root/work` is a sym-link to `/root/.roswell/local-projects`
 
+If you want to add custom `.el` file, add `/root/.emacs.d/site-lisp/custom/custom.el` file into the container.
+
 ## Description
 
 This mainly consists of ...

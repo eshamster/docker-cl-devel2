@@ -147,6 +147,9 @@
             (font-lock-add-keywords
              nil '(("^[^\n]\\{100\\}\\(.*\\)$" 1 font-lock-warning-face t)))))
 
+;; --- load custom el file if exist --- ;;
+(load "custom/custom.el" t)
+
 ;; --------------------- ;;
 ;; --- auto settings --- ;;
 ;; --------------------- ;;
