@@ -4,8 +4,12 @@
 ;; ----- Install packages ----- ;;
 
 (require 'package)
-(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (package-initialize)
+;; The following is a temporal solution until Emacs 26.3+
+;; to avoid "Bad Request" for, for example, https://elpa.gnu.org/packages/archive-contents.
+;; Cf. https://www.reddit.com/r/emacs/comments/cdei4p/failed_to_download_gnu_archive_bad_request/
+(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 
 (defun install-packages (packages)
   (let ((refreshed nil))
