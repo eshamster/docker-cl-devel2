@@ -4,8 +4,12 @@
 ;; ----- Install packages ----- ;;
 
 (require 'package)
-(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (package-initialize)
+;; The following is a temporal solution until Emacs 26.3+
+;; to avoid "Bad Request" for, for example, https://elpa.gnu.org/packages/archive-contents.
+;; Cf. https://www.reddit.com/r/emacs/comments/cdei4p/failed_to_download_gnu_archive_bad_request/
+(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 
 (defun install-packages (packages)
   (let ((refreshed nil))
@@ -20,7 +24,6 @@
                     magit
                     markdown-mode
                     paredit
-                    w3m
                     smex
                     slime
                     ac-slime))
@@ -83,6 +86,16 @@
 
 (setq dired-listing-switches "-lXa")
 
+(advice-add 'find-name-dired :around
+            (lambda (orig-func &rest rest)
+              (let ((orig-option find-ls-option))
+                (unwind-protect
+                    (progn
+                      (setq find-ls-option
+                            '("-exec ls --color=never -ld {} \\;" . "-ld"))
+                      (apply orig-func rest))
+                  (setq find-ls-option orig-option)))))
+
 ;; ----- Other libraries ----- ;;
 
 ;; display the directory name of the file when files that have a same name are opened
@@ -110,12 +123,9 @@
 (add-hook 'slime-mode-hook 'set-up-slime-ac)
 (add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
 
-;; HyperSpec on w3
-(require 'hyperspec)
-(setq common-lisp-hyperspec-root (concat "file://" (expand-file-name "~/.emacs.d/docs/HyperSpec/")))
-(require 'w3m)
-(setq browse-url-browser-function 'w3m-browse-url)
-(global-set-key (kbd "C-c h") 'hyperspec-lookup)
+;; hyperspec
+(setq browse-url-browser-function 'eww-browse-url)
+(global-set-key (kbd "C-c h") 'slime-hyperspec-lookup)
 
 ;; paredit
 (require 'paredit)
@@ -141,6 +151,9 @@
             (font-lock-add-keywords
              nil '(("^[^\n]\\{100\\}\\(.*\\)$" 1 font-lock-warning-face t)))))
 
+;; --- load custom el file if exist --- ;;
+(load "custom/custom.el" t)
+
 ;; --------------------- ;;
 ;; --- auto settings --- ;;
 ;; --------------------- ;;
@@ -157,5 +170,5 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(italic ((t (:background "black" :foreground "#ffffff" :slant italic)))))
 (put 'dired-find-alternate-file 'disabled nil)
